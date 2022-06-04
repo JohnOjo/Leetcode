@@ -2,7 +2,7 @@
  * @param {number[]} arr
  * @return {number}
  */
-var sumSubarrayMins = function(arr) {   
+ var sumSubarrayMins = function(arr) {   
     let sum = arr.reduce((a, b) => a + b)
     const arrSize = arr.length
     for (let i = 2; i <= arrSize; i++) {
