@@ -1,17 +1,47 @@
 /**
- * @param {number[]} arr
- * @return {number}
+ * @param {number[]} asteroids
+ * @return {number[]}
  */
-var sumSubarrayMins = function(arr) {   
-    let sum = arr.reduce((a, b) => a + b)
-    const arrSize = arr.length
-    for (let i = 2; i <= arrSize; i++) {
-        for (let j = 0; j <= arrSize-i; j++) {
-            sum += Math.min(...arr.slice(j, i+j))
+ var asteroidCollision = function(asteroids) {
+    const asteroidsSize = asteroids.map((a) => Math.abs(a))
+    const asteroidsLength = asteroids.length
+    for (let i = 0; i < asteroids.length;) {
+        const currentAsteroid = asteroids.find((a) => a != null)
+        const nextAsteroid = asteroids.find((a, index) => a != null && index > i);
+        const currentAsteroidSize = asteroidsSize.find((a) => a != null)
+        const nextAsteroidSize = asteroidsSize.find((a, index) => a != null && index > i);
+
+        if(currentAsteroid > 0 && nextAsteroid < 0) {
+            if (currentAsteroidSize > nextAsteroidSize) {
+                const indexToRemove = asteroids.slice(i, asteroidsLength).indexOf(nextAsteroid)
+                asteroids[i+indexToRemove] = null
+                asteroidsSize[i+indexToRemove] = null
+                i = i + indexToRemove            
+            }
+            else if (currentAsteroidSize < nextAsteroidSize) {
+                const indexToRemove = asteroids.indexOf(currentAsteroid)
+                asteroids[indexToRemove] = null
+                asteroidsSize[indexToRemove] = null
+                i = indexToRemove + 1
+            }
+            else if (currentAsteroidSize === nextAsteroidSize) {
+                asteroids[i] = null
+                asteroidsSize[i] = null
+                const indexToRemove = asteroids.slice(i, asteroidsLength).indexOf(nextAsteroid)
+                asteroids[i+indexToRemove] = null
+                asteroidsSize[i+indexToRemove] = null
+                i = i + indexToRemove  
+            }
+        } 
+        else {
+            i++
         }
     }
-    return (sum%((10**9)+7))
+
+    const output = asteroids.filter((asteroid) => asteroid != null);
+
+    return output;
 };
 
-arr = [3,1,2,4]
-console.log(sumSubarrayMins(arr))
+asteroids = [10,2,-5]
+console.log(asteroidCollision(asteroids))
