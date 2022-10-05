@@ -31,3 +31,83 @@
     
     return permutations
 };
+
+let permute = function(nums) {
+    const numsSize = nums.length
+    
+    if(numsSize === 1){
+        return [nums]
+    }
+    
+    let numberOfPermutations = 1
+    for(let index = 2; index<=numsSize; index++){
+        numberOfPermutations = numberOfPermutations * index
+    }
+    
+    const permutationSet = new Array(numsSize).fill(null)
+    const permutations = []
+    for(let index = 0; index<numberOfPermutations; index++){
+        permutations.push([...permutationSet])
+    }
+    
+    for(let index = 0; index<numsSize; index++){
+        const number = nums[index]
+        let startingPosition = index
+        permutations.forEach((permutation) => {
+            console.log(startingPosition)
+            permutation[startingPosition] = number
+            if(startingPosition === numsSize-1){
+                startingPosition = 0
+            }
+            else {
+                startingPosition++
+            }
+        })
+        console.log(' ************************ ')
+    }
+    
+    return permutations
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ let permute = function(nums) {
+    const numsSize = nums.length
+    
+    if(numsSize === 1){
+        return [nums]
+    }
+    
+    let numberOfPermutations = 1
+    for(let index = 2; index<=numsSize; index++){
+        numberOfPermutations = numberOfPermutations * index
+    }
+    
+    const permutationSet = new Array(numsSize).fill(null)
+    const permutations = []
+    for(let index = 0; index<numberOfPermutations; index++){
+        permutations.push([...permutationSet])
+    }
+    
+    for(let index = 0; index<numsSize; index++){
+        const number = nums[index]
+        let startingPosition = index
+        
+        permutations.forEach((permutation, index) => {
+            permutation[startingPosition] = number
+            if(startingPosition === numsSize-1){
+                startingPosition = 0
+            }
+            else {
+                startingPosition++
+            }
+        })
+    }
+    
+    for(let index = numsSize-1; index<permutations.length-1; index++){
+        permutations[index].reverse()
+    }
+    return permutations
+};
