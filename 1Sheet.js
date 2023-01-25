@@ -8,16 +8,15 @@ const sheet = function() {
     array.shift() // array = []
 
     array = [1, 2, 3]
-    Math.max(...array)
-    Math.min(...array)
+    let max = Math.max(...array)
+    let min = Math.min(...array)
     array.length // 3
-
-    array.reverse()
-    array.sort((prev, next) => prev - next) // ascending order sort for numbers
-
+    array.includes(1, 0) // true
     // second parameter of slice() is non-inclusive
     const arraySlice =  array.slice(0, 2) // [1, 2]
 
+    array.reverse()
+    array.sort((prev, next) => prev - next) // ascending order sort for numbers
 
     // sets
     const set = new Set(array)
@@ -33,4 +32,10 @@ const sheet = function() {
     map.has("a") // true
     map.delete("c") // [["a", 1], ["b", 2]]
     map.size // 2
+
+    let string = "abc"
+    string.includes("a") // true
+    string = string.replace("c", "cd") // "abcd"
+    let charCode = string.charCodeAt(1) // b
+    string = string.concat(ef) // "abcdef"
 }
