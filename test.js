@@ -6,9 +6,9 @@
     const asteroidsSize = asteroids.map((a) => Math.abs(a))
     const asteroidsLength = asteroids.length
     for (let i = 0; i < asteroids.length;) {
-        const currentAsteroid = asteroids.find((a) => a != null)
+        const currentAsteroid = asteroids[i]
         const nextAsteroid = asteroids.find((a, index) => a != null && index > i);
-        const currentAsteroidSize = asteroidsSize.find((a) => a != null)
+        const currentAsteroidSize = asteroidsSize[i]
         const nextAsteroidSize = asteroidsSize.find((a, index) => a != null && index > i);
 
         if(currentAsteroid > 0 && nextAsteroid < 0) {
@@ -19,10 +19,11 @@
                 i = i + indexToRemove            
             }
             else if (currentAsteroidSize < nextAsteroidSize) {
-                const indexToRemove = asteroids.indexOf(currentAsteroid)
-                asteroids[indexToRemove] = null
-                asteroidsSize[indexToRemove] = null
-                i = indexToRemove + 1
+                asteroids[i] = null
+                asteroidsSize[i] = null
+                const reversedSlice = asteroids.slice(0, i+1).reverse()
+                const astroidIndexToGoBackTo = reversedSlice.indexOf(reversedSlice.find((a) => a != null))
+                i = reversedSlice.length - astroidIndexToGoBackTo -1
             }
             else if (currentAsteroidSize === nextAsteroidSize) {
                 asteroids[i] = null
@@ -30,7 +31,9 @@
                 const indexToRemove = asteroids.slice(i, asteroidsLength).indexOf(nextAsteroid)
                 asteroids[i+indexToRemove] = null
                 asteroidsSize[i+indexToRemove] = null
-                i = i + indexToRemove  
+                const reversedSlice = asteroids.slice(0, i+1).reverse()
+                const astroidIndexToGoBackTo = reversedSlice.indexOf(reversedSlice.find((a) => a != null))
+                i = reversedSlice.length - astroidIndexToGoBackTo -1
             }
         } 
         else {
@@ -44,4 +47,14 @@
 };
 
 asteroids = [10,2,-5]
-console.log(asteroidCollision(asteroids))
+const set = new Set(asteroids)
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+  fruits.forEach((value, key) => {
+    console.log(value+key)
+  })
+//console.log(set.values())
+//console.log(asteroidCollision(asteroids))
