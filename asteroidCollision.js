@@ -45,16 +45,3 @@
 
     return output;
 };
-
-asteroids = [10,2,-5]
-const set = new Set(asteroids)
-const fruits = new Map([
-    ["apples", 500],
-    ["bananas", 300],
-    ["oranges", 200]
-  ]);
-  fruits.forEach((value, key) => {
-    console.log(value+key)
-  })
-//console.log(set.values())
-//console.log(asteroidCollision(asteroids))
