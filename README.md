@@ -1,3 +1,4 @@
 # Leetcode
 Problems solved on Leetcode
-testing
+
+Link to my LeetCode account: https://leetcode.com/johnojo97/
